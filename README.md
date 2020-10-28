@@ -6,7 +6,7 @@ Housing prices in Seattle by price quantile. Red areas indicate more affluent ho
 
 ### Which features correlate most highly with price? 
 <details>
-    <summary> </summary>
+    <summary> Grade and Sq. Footage of a home are most closely correlated with price in the correlation matrix.  </summary>
 
 ![png](https://github.com/Nick-Kolowich/dsc-phase-2-project-online/blob/master/images/fig2.png)
 
@@ -27,7 +27,6 @@ corr_matrix_90['Price']
 
 </details>
 
-Grade and Sq. Footage of a home are most closely correlated with price in the correlation matrix. 
 
 ###  Create Training & Testing Sets
 
@@ -87,7 +86,7 @@ The linear model created for the training set should apply fairly well to the te
 ### Initial OLS Regression Model
 
 <details>
-    <summary> Creating an initial model, which includes all non-categorical features </summary>
+    <summary> creating an initial model, which includes all non-categorical features </summary>
 
 ```python
 # creating an OLS regression model
@@ -356,7 +355,7 @@ plt.show()
 ### Lasso Regression
 
 <details>
-    <summary> Checking if we've selected the most important features with a Lasso model </summary>
+    <summary> seeing if we've selected the most important features with a Lasso model </summary>
 
 ```python
 # performs lasso regression to determine most relevant features
@@ -561,7 +560,7 @@ plt.show()
 ### Removing Outliers    
 
 <details>
-    <summary> Removing all houses > $1,000,000, the top 6.8% of the data. </summary>
+    <summary> removing all houses > $1,000,000, the top 6.8% of the data. </summary>
 
 ```python
 # remove all houses above $1,000,000
@@ -666,12 +665,3 @@ sqft_Basement: 1.424
 
 Removing houses above $1MM makes the distribution of residuals much more normally distributed.
 It brings skew down from 3.02 to 0.53 and kurtosis down from 35.77 to 3.2.
-
-
-
-
-
-
-```python
-
-```
