@@ -658,13 +658,16 @@ After
 
 The final linear model has an r-squared of 0.535, which means it can only explain about 54% of the response variable variation. The features used to construct the final model has p-values less than 0.05 in the initial model, and were tested for multicollinearity using the litmus test of their variance inflation factors.
 
-Their corresponding VIFs were: 
+<details>
+    <summary> Their corresponding VIFs were: </summary>
 
 sqft_House: 5.787
 
 Grade: 3.074
 
 sqft_Basement: 1.424
+
+</details>
 
 These VIFs show a good amount of correlation between the variables and price, but do not exceed the threshold for multicollinearity.
 
