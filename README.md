@@ -33,6 +33,7 @@ Grade and Sq. Footage of a home are most closely correlated with price in the co
 ###  Create Training & Testing Sets
 <details>
     <summary> Expand </summary>
+    
 ```python
 # create target and features
 target = data_z['Price']
@@ -85,6 +86,8 @@ The linear model created for the training set should apply fairly well to the te
 
 ### Initial OLS Regression Model
 
+<details>
+    <summary> Expand </summary>
 
 ```python
 # creating an OLS regression model
@@ -186,9 +189,14 @@ model.summary()
 </tr>
 </table><br/><br/>Warnings:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.<br/>[2] The smallest eigenvalue is 4.55e-28. This might indicate that there are<br/>strong multicollinearity problems or that the design matrix is singular.
 
-
+</details>
 
 ### Refining the OLS Regression Model
+
+<details>
+    <summary> Expand </summary>
+
+adjusting the OLS model to only include the significant features (p<0.05)
 
 
 ```python
@@ -281,9 +289,12 @@ sig_model.summary()
 </tr>
 </table><br/><br/>Warnings:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
 
+</details>
 
+### Checking for multicollinearity with VIF
 
-### Checking for multicollinearity with VIF 
+<details>
+    <summary> Expand </summary>
 
 
 ```python
@@ -304,10 +315,12 @@ list(zip(significant_features, vif))
      ('sqft_Nearby_Homes', 2.6933021146186102),
      ('sqft_Nearby_Lots', 1.0629364075575987)]
 
-
+</details>
 
 ### Correlation Matrix of Significant Features 
 
+<details>
+    <summary> Expand </summary>
 
 ```python
 correlation_significant_features_df = data_z[significant_features]
@@ -337,12 +350,16 @@ plt.xticks(rotation=60)
 plt.show()
 ```
 
+![png](https://github.com/Nick-Kolowich/dsc-phase-2-project-online/blob/master/images/fig3.png)
 
-![png](output_22_0.png)
-
+</details>
 
 ### Lasso Regression
 
+Checking if we've selected the most important features with a Lasso model
+
+<details>
+    <summary> Expand </summary>
 
 ```python
 # performs lasso regression to determine most relevant features
@@ -357,91 +374,14 @@ plt.show()
 ```
 
 
-![png](output_24_0.png)
+![png](https://github.com/Nick-Kolowich/dsc-phase-2-project-online/blob/master/images/fig12.png)
 
-
-### Three Variable OLS Regression Model
-
-
-```python
-#building an OLS model with the 3 most explanatory variables
-_target_ = 'Price'
-_significant_features_ = ['sqft_House','Grade','sqft_Basement']
-_significant_predictors_ = '+'.join(_significant_features_)
-formula = _target_ + '~' + _significant_predictors_
-three_var_model = ols(formula=formula, data=data_).fit()
-three_var_model.summary()
-```
-
-
-
-
-<table class="simpletable">
-<caption>OLS Regression Results</caption>
-<tr>
-  <th>Dep. Variable:</th>          <td>Price</td>      <th>  R-squared:         </th>  <td>   0.541</td>  
-</tr>
-<tr>
-  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th>  <td>   0.541</td>  
-</tr>
-<tr>
-  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th>  <td>   8494.</td>  
-</tr>
-<tr>
-  <th>Date:</th>             <td>Wed, 28 Oct 2020</td> <th>  Prob (F-statistic):</th>   <td>  0.00</td>   
-</tr>
-<tr>
-  <th>Time:</th>                 <td>01:55:31</td>     <th>  Log-Likelihood:    </th> <td>-2.9896e+05</td>
-</tr>
-<tr>
-  <th>No. Observations:</th>      <td> 21596</td>      <th>  AIC:               </th>  <td>5.979e+05</td> 
-</tr>
-<tr>
-  <th>Df Residuals:</th>          <td> 21592</td>      <th>  BIC:               </th>  <td>5.980e+05</td> 
-</tr>
-<tr>
-  <th>Df Model:</th>              <td>     3</td>      <th>                     </th>      <td> </td>     
-</tr>
-<tr>
-  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>      <td> </td>     
-</tr>
-</table>
-<table class="simpletable">
-<tr>
-        <td></td>           <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
-</tr>
-<tr>
-  <th>Intercept</th>     <td>-6.565e+05</td> <td> 1.36e+04</td> <td>  -48.300</td> <td> 0.000</td> <td>-6.83e+05</td> <td> -6.3e+05</td>
-</tr>
-<tr>
-  <th>sqft_House</th>    <td>  156.5049</td> <td>    3.254</td> <td>   48.102</td> <td> 0.000</td> <td>  150.128</td> <td>  162.882</td>
-</tr>
-<tr>
-  <th>Grade</th>         <td> 1.108e+05</td> <td> 2325.619</td> <td>   47.637</td> <td> 0.000</td> <td> 1.06e+05</td> <td> 1.15e+05</td>
-</tr>
-<tr>
-  <th>sqft_Basement</th> <td>   78.0710</td> <td>    4.427</td> <td>   17.636</td> <td> 0.000</td> <td>   69.394</td> <td>   86.748</td>
-</tr>
-</table>
-<table class="simpletable">
-<tr>
-  <th>Omnibus:</th>       <td>17102.423</td> <th>  Durbin-Watson:     </th>  <td>   1.976</td>  
-</tr>
-<tr>
-  <th>Prob(Omnibus):</th>  <td> 0.000</td>   <th>  Jarque-Bera (JB):  </th> <td>1062486.894</td>
-</tr>
-<tr>
-  <th>Skew:</th>           <td> 3.332</td>   <th>  Prob(JB):          </th>  <td>    0.00</td>  
-</tr>
-<tr>
-  <th>Kurtosis:</th>       <td>36.710</td>   <th>  Cond. No.          </th>  <td>1.87e+04</td>  
-</tr>
-</table><br/><br/>Warnings:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.<br/>[2] The condition number is large, 1.87e+04. This might indicate that there are<br/>strong multicollinearity or other numerical problems.
-
-
+</details>
 
 ### Final OLS model 
 
+<details>
+    <summary> Expand </summary>
 
 ```python
 #building an OLS model with only Grade and SqFt.
@@ -516,11 +456,12 @@ two_var_model.summary()
 </table><br/><br/>Warnings:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.<br/>[2] The condition number is large, 1.8e+04. This might indicate that there are<br/>strong multicollinearity or other numerical problems.
 
 
+</details>
 
 ###  Scatter Plots of Price vs. Grade & Square Footage
 
-#### Original Data
-
+<details>
+    <summary> Original Data </summary>
 
 ```python
 # 3D plot for the original data
@@ -549,11 +490,12 @@ plt.show()
 ```
 
 
-![png](output_31_0.png)
+![png](https://github.com/Nick-Kolowich/dsc-phase-2-project-online/blob/master/images/fig4.png)
 
+</details>
 
-#### z-score Data 
-
+<details>
+    <summary> z-score Data </summary>
 
 ```python
 # 3D plot for the z-score data
@@ -582,11 +524,12 @@ plt.show()
 ```
 
 
-![png](output_33_0.png)
+![png](https://github.com/Nick-Kolowich/dsc-phase-2-project-online/blob/master/images/fig5.png)
 
+</details>
 
-#### Log Transformed Data 
-
+<details>
+    <summary> Log Transformed Data </summary>
 
 ```python
 # 3D plot for the log transformed data
@@ -614,9 +557,9 @@ ax.ticklabel_format(axis='z', style='plain')
 plt.show()
 ```
 
+![png](https://github.com/Nick-Kolowich/dsc-phase-2-project-online/blob/master/images/fig6.png)
 
-![png](output_35_0.png)
-
+</details>
 
 ### Investigating Residuals 
 
