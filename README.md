@@ -31,7 +31,7 @@ corr_matrix_90['Price']
 ###  Create Training & Testing Sets
 
 <details>
-    <summary> </summary>
+    <summary> The linear model created for the training set should apply fairly well to the test data set.    </summary>
     
 ```python
 # create target and features
@@ -75,13 +75,14 @@ print("10-fold cross validation: {}".format(round(np.mean(cvscores_10), 4)))
     3-fold cross validation: 0.5621
     5-fold cross validation: 0.5611
     10-fold cross validation: 0.5595
-
-</details>
-
+    
 computed r-squared = 0.564
 mean r-squared for 3,5, and 10 fold CVs = 0.5609
 
-The linear model created for the training set should apply fairly well to the test data set.
+The linear model created for the training set should apply fairly well to the test data set.    
+
+</details>
+
 
 ### Initial OLS Regression Model
 
@@ -318,7 +319,7 @@ list(zip(significant_features, vif))
 ### Correlation Matrix of Significant Features 
 
 <details>
-    <summary> </summary>
+    <summary> recreating the correlation matrix, keeping only selected features </summary>
 
 ```python
 correlation_significant_features_df = data_z[significant_features]
@@ -377,7 +378,7 @@ plt.show()
 ### Final OLS model 
 
 <details>
-    <summary> </summary>
+    <summary> boiling the model down to the two best predictors of price </summary>
 
 ```python
 #building an OLS model with only Grade and SqFt.
@@ -640,7 +641,7 @@ model_under_1m.summary()
 ### Effect on Residuals
 
 <details>
-    <summary> </summary>
+    <summary> how does removing outliers affect the distribution of residuals? </summary>
 
 
 Before
