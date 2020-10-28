@@ -6,7 +6,7 @@ Housing prices in Seattle by price quantile. Red areas indicate more affluent ho
 
 ### Which features correlate most highly with price? 
 <details>
-    <summary> Expand </summary>
+    <summary> </summary>
 
 ![png](https://github.com/Nick-Kolowich/dsc-phase-2-project-online/blob/master/images/fig2.png)
 
@@ -32,7 +32,7 @@ Grade and Sq. Footage of a home are most closely correlated with price in the co
 ###  Create Training & Testing Sets
 
 <details>
-    <summary> Expand </summary>
+    <summary> </summary>
     
 ```python
 # create target and features
@@ -86,10 +86,8 @@ The linear model created for the training set should apply fairly well to the te
 
 ### Initial OLS Regression Model
 
-Creating an initial model, which includes all non-categorical features
-
 <details>
-    <summary> Expand </summary>
+    <summary> Creating an initial model, which includes all non-categorical features </summary>
 
 ```python
 # creating an OLS regression model
@@ -195,10 +193,8 @@ model.summary()
 
 ### Refining the OLS Regression Model
 
-adjusting the OLS model to only include the significant features (p<0.05)
-
 <details>
-    <summary> Expand </summary>
+    <summary> adjusting the OLS model to only include the significant features (p<0.05) </summary>
 
 
 
@@ -296,10 +292,8 @@ sig_model.summary()
 
 ### Checking for multicollinearity with VIF
 
-checking the variance inflation factors are within the acceptable threshold (VIF < 10)
-
 <details>
-    <summary> Expand </summary>
+    <summary> checking the variance inflation factors are within the acceptable threshold (VIF < 10) </summary>
 
 
 ```python
@@ -325,7 +319,7 @@ list(zip(significant_features, vif))
 ### Correlation Matrix of Significant Features 
 
 <details>
-    <summary> Expand </summary>
+    <summary> </summary>
 
 ```python
 correlation_significant_features_df = data_z[significant_features]
@@ -361,10 +355,8 @@ plt.show()
 
 ### Lasso Regression
 
-Checking if we've selected the most important features with a Lasso model
-
 <details>
-    <summary> Expand </summary>
+    <summary> Checking if we've selected the most important features with a Lasso model </summary>
 
 ```python
 # performs lasso regression to determine most relevant features
@@ -386,7 +378,7 @@ plt.show()
 ### Final OLS model 
 
 <details>
-    <summary> Expand </summary>
+    <summary> </summary>
 
 ```python
 #building an OLS model with only Grade and SqFt.
@@ -568,10 +560,8 @@ plt.show()
 
 ### Removing Outliers    
 
-Removing all houses > $1,000,000, the top 6.8% of the data.
-
 <details>
-    <summary> Expand </summary>
+    <summary> Removing all houses > $1,000,000, the top 6.8% of the data. </summary>
 
 ```python
 # remove all houses above $1,000,000
@@ -651,7 +641,8 @@ model_under_1m.summary()
 ### Effect on Residuals
 
 <details>
-    <summary> Expand </summary>
+    <summary> </summary>
+
 
 Before
 
