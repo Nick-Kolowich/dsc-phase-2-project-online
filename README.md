@@ -661,8 +661,12 @@ The final linear model has an r-squared of 0.535, which means it can only explai
 Their corresponding VIFs were: 
 
 sqft_House: 5.787
+
 Grade: 3.074
+
 sqft_Basement: 1.424
+
+These VIFs show a good amount of correlation between the variables and price, but do not exceed the threshold for multicollinearity.
 
 Removing houses above $1MM makes the distribution of residuals much more normally distributed.
 It brings skew down from 3.02 to 0.53 and kurtosis down from 35.77 to 3.2.
