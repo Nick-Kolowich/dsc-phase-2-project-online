@@ -1,5 +1,4 @@
 # King County Housing Analysis
-# King County Housing Analysis
 
 ![png](https://github.com/Nick-Kolowich/dsc-phase-2-project-online/blob/master/images/King%20County%20Housing%20Prices.png)
 
@@ -31,6 +30,7 @@ corr_matrix_90['Price']
 Grade and Sq. Footage of a home are most closely correlated with price in the correlation matrix. 
 
 ###  Create Training & Testing Sets
+
 <details>
     <summary> Expand </summary>
     
@@ -85,6 +85,8 @@ mean r-squared for 3,5, and 10 fold CVs = 0.5609
 The linear model created for the training set should apply fairly well to the test data set.
 
 ### Initial OLS Regression Model
+
+Creating an initial model, which includes all non-categorical features
 
 <details>
     <summary> Expand </summary>
@@ -193,10 +195,11 @@ model.summary()
 
 ### Refining the OLS Regression Model
 
+adjusting the OLS model to only include the significant features (p<0.05)
+
 <details>
     <summary> Expand </summary>
 
-adjusting the OLS model to only include the significant features (p<0.05)
 
 
 ```python
@@ -292,6 +295,8 @@ sig_model.summary()
 </details>
 
 ### Checking for multicollinearity with VIF
+
+checking the variance inflation factors are within the acceptable threshold (VIF < 10)
 
 <details>
     <summary> Expand </summary>
@@ -561,48 +566,12 @@ plt.show()
 
 </details>
 
-### Investigating Residuals 
+### Removing Outliers    
 
+Removing all houses > $1,000,000, the top 6.8% of the data.
 
-```python
-residplot = sm.graphics.qqplot(two_var_model.resid, dist=stats.norm, line='45', fit=True)
-```
-
-
-![png](output_37_0.png)
-
-
-
-```python
-sns.distplot(two_var_model.resid)
-plt.ticklabel_format(style='plain')
-plt.title('Distribution of Residuals')
-plt.show()
-```
-
-
-![png](output_38_0.png)
-
-
-
-```python
-for i in range(90, 100):
-    q = i / 100
-    print('{} percentile: {}'.format(q, data_['Price'].quantile(q=q)))
-```
-
-    0.9 percentile: 887000.0
-    0.91 percentile: 919994.5
-    0.92 percentile: 950000.0
-    0.93 percentile: 997967.5
-    0.94 percentile: 1060000.0
-    0.95 percentile: 1160000.0
-    0.96 percentile: 1260000.0
-    0.97 percentile: 1390000.0
-    0.98 percentile: 1600000.0
-    0.99 percentile: 1970000.0
-    
-
+<details>
+    <summary> Expand </summary>
 
 ```python
 # remove all houses above $1,000,000
@@ -617,9 +586,6 @@ model_under_1m.summary()
 
     Percent removed: 0.06751
     
-
-
-
 
 <table class="simpletable">
 <caption>OLS Regression Results</caption>
@@ -680,59 +646,22 @@ model_under_1m.summary()
 </tr>
 </table><br/><br/>Warnings:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.<br/>[2] The condition number is large, 1.76e+04. This might indicate that there are<br/>strong multicollinearity or other numerical problems.
 
+</details>
 
+### Effect on Residuals
 
+<details>
+    <summary> Expand </summary>
 
-```python
-fig_drop_outliers = sm.graphics.qqplot(model_under_1m.resid, dist=stats.norm, line='45', fit=True)
-```
+Before
 
+![png](https://github.com/Nick-Kolowich/dsc-phase-2-project-online/blob/master/images/fig7.png)
 
-![png](output_41_0.png)
+After
 
+![png](https://github.com/Nick-Kolowich/dsc-phase-2-project-online/blob/master/images/fig8.png)
 
-
-```python
-sns.distplot(model_under_1m.resid)
-plt.ticklabel_format(style='plain')
-plt.title('Distribution of Residuals')
-plt.show()
-```
-
-
-![png](output_42_0.png)
-
-
-
-```python
-# 3D plot for the original data
-fig, ax = plt.subplots()
-ax = fig.add_subplot(111, projection='3d')
-
-x=subset['Grade']
-y=subset['sqft_House']
-z=subset['Price']
-
-x = np.array(x)
-y = np.array(y)
-z = np.array(z)
-
-ax.scatter(x, y, z, c='springgreen', marker='o',linewidths=1, edgecolors='blue', alpha=0.8)
-fig.set_size_inches(15,10)
-plt.title('Price vs. Grade & Sqft. of House under $1MM')
-ax.set_xlabel('Grade')
-ax.set_ylabel('sqft. of House')
-ax.set_zlabel('Price')
-ax.zaxis.set_tick_params(labelsize=8)
-
-ax.ticklabel_format(axis='z', style='plain')
-
-plt.show()
-```
-
-
-![png](output_43_0.png)
-
+</details>
 
 ### Conclusion 
 
@@ -748,16 +677,7 @@ Removing houses above $1MM makes the distribution of residuals much more normall
 It brings skew down from 3.02 to 0.53 and kurtosis down from 35.77 to 3.2.
 
 
-```python
-jupyter nbconvert --to markdown README.ipynb
-```
 
-
-      File "<ipython-input-28-3c9a2e22f0f1>", line 1
-        jupyter nbconvert --to markdown README.ipynb
-                ^
-    SyntaxError: invalid syntax
-    
 
 
 
