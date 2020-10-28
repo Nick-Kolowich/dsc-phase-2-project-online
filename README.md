@@ -1,84 +1,15 @@
 # King County Housing Analysis
+# King County Housing Analysis
 
+![png](https://github.com/Nick-Kolowich/dsc-phase-2-project-online/blob/master/images/King%20County%20Housing%20Prices.png)
 
-### Import Libraries 
+Housing prices in Seattle by price quantile. Red areas indicate more affluent homes, clusters are see in town, most notably Bellevue, and around water. 
 
+### Which features correlate most highly with price? 
+<details>
+    <summary> Expand </summary>
 
-```python
-import warnings
-warnings.filterwarnings('ignore')
-
-#custom functions file
-from Functions import *
-
-#pandas and numpy
-import pandas as pd
-import numpy as np
-
-#visualization libraries
-import matplotlib.pyplot as plt
-import seaborn as sns
-#%matplotlib qt
-
-#sklearn
-from sklearn import linear_model
-from sklearn.linear_model import Lasso
-from sklearn.metrics import mean_squared_error, r2_score
-from sklearn.linear_model import LinearRegression
-from sklearn.model_selection import cross_val_score
-from sklearn.model_selection import train_test_split
-
-#stats and scipy
-import statsmodels.api as sm
-from statsmodels.stats.outliers_influence import variance_inflation_factor
-from statsmodels.formula.api import ols
-import scipy.stats as stats
-
-#optional code to display all values as floats to 4 decimals
-#pd.options.display.float_format = '{:,.4f}'.format
-```
-
-### Import Cleaned Dataframes
-
-
-```python
-data = pd.read_csv(r'C:\Users\Nick\Documents\Flatiron Project 2\dsc-phase-2-project-online-master\dsc-phase-2-project-online-master\data\kc_house_data.csv')
-data_ = pd.read_csv(r'C:\Users\Nick\Documents\Flatiron Project 2\dsc-phase-2-project-online-master\dsc-phase-2-project-online-master\data\cleaned_data_features.csv')
-data_z = pd.read_csv(r'C:\Users\Nick\Documents\Flatiron Project 2\dsc-phase-2-project-online-master\dsc-phase-2-project-online-master\data\z_score_data.csv')
-data_log = pd.read_csv(r'C:\Users\Nick\Documents\Flatiron Project 2\dsc-phase-2-project-online-master\dsc-phase-2-project-online-master\data\log_transform_data.csv')
-```
-
-### Correlation Matrix 
-
-
-```python
-# builds a correlation matrix for the z-score columns
-correlation = data_z.corr()
-```
-
-
-```python
-# creates the figure and axis for the subplots
-fig, ax = plt.subplots(figsize=(13, 8))
-
-# creates a mask to remove the mirrored half of heatmap
-mask = np.triu(np.ones_like(correlation, dtype=np.bool))
-
-# adjusts mask and dataframe
-mask_adj = mask[1:, :-1]
-correlation_adj = correlation.iloc[1:,:-1].copy()
-
-# plots heatmap
-sns.heatmap(correlation_adj, mask=mask_adj, annot=True, fmt='.2f', cmap='Blues', linewidths=3, vmin=-0.5, vmax=0.9, cbar_kws={"shrink": .8})
-
-# ytick adjustment
-plt.xticks(rotation=60)
-plt.show()
-```
-
-
-![png](output_7_0.png)
-
+![png](https://github.com/Nick-Kolowich/dsc-phase-2-project-online/blob/master/images/fig2.png)
 
 
 ```python
@@ -86,10 +17,6 @@ plt.show()
 corr_matrix_90 = correlation.describe(percentiles=[0.9])
 corr_matrix_90['Price']
 ```
-
-
-
-
     count    12.000000
     mean      0.432650
     std       0.296210
@@ -99,29 +26,17 @@ corr_matrix_90['Price']
     max       1.000000
     Name: Price, dtype: float64
 
+</details>
 
+Grade and Sq. Footage of a home are most closely correlated with price in the correlation matrix. 
 
 ###  Create Training & Testing Sets
-
-
+<details>
+    <summary> Expand </summary>
 ```python
 # create target and features
 target = data_z['Price']
 features = data_z.drop(columns=['Price'], axis=1)
-
-X_train, X_test, y_train, y_test = train_test_split(features, target, test_size=.3, random_state=333)
-```
-
-
-```python
-print (X_train.shape, y_train.shape)
-print (X_test.shape, y_test.shape)
-```
-
-    (15117, 11) (15117,)
-    (6479, 11) (6479,)
-    
-
 
 ```python
 # instantiate a linear regression model
@@ -132,29 +47,16 @@ linear_reg_model.fit(X_train, y_train)
 target_train = linear_reg_model.predict(X_train)
 target_test = linear_reg_model.predict(X_test)
 
-# calculate MSE scores for both train/test
-train_mse = mean_squared_error(y_train, target_train)
-test_mse = mean_squared_error(y_test, target_test)
-print('Training Set Mean Squared Error:', round(train_mse, 4))
-print('Test Set Mean Squared Error:', round(test_mse, 4))
-```
-
-    Training Set Mean Squared Error: 0.4454
-    Test Set Mean Squared Error: 0.4138
-    
-
-
 ```python
 # Compute and print r^2 and RMSE
-print("r-squared: {}".format(round(linear_reg_model.score(X_test, y_test), 4)))
-rmse = np.sqrt(mean_squared_error(y_test, target_test))
+print("r-squared: {}".format(round(linear_reg_model.score(X_train, y_train), 4)))
+rmse = np.sqrt(mean_squared_error(y_train, target_train))
 print("RMSE: {}".format(round(rmse, 4)))
 ```
 
-    r-squared: 0.5642
+    r-squared: 0.564
     RMSE: 0.6432
     
-
 
 ```python
 # Perform 3-fold cross validation
@@ -173,7 +75,13 @@ print("10-fold cross validation: {}".format(round(np.mean(cvscores_10), 4)))
     3-fold cross validation: 0.5621
     5-fold cross validation: 0.5611
     10-fold cross validation: 0.5595
-    
+
+</details>
+
+computed r-squared = 0.564
+mean r-squared for 3,5, and 10 fold CVs = 0.5609
+
+The linear model created for the training set should apply fairly well to the test data set.
 
 ### Initial OLS Regression Model
 
