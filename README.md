@@ -1,6 +1,6 @@
 # King County Housing Analysis
 
-![png](https://github.com/Nick-Kolowich/dsc-phase-2-project-online/blob/master/images/King%20County%20Housing%20Prices.png)
+![png](https://github.com/Nick-Kolowich/dsc-phase-2-project-online/blob/master/images/2.png)
 
 Housing prices in Seattle by price quantile. Red areas indicate more affluent homes, clusters are see in town, most notably Bellevue, and around water. 
 
@@ -87,7 +87,7 @@ The linear model created for the training set should apply fairly well to the te
 ### Initial OLS Regression Model
 
 <details>
-    <summary> creating an initial model, which includes all non-categorical features </summary>
+    <summary> creating an initial model, which includes mostly non-categorical features </summary>
 
 ```python
 # creating an OLS regression model
