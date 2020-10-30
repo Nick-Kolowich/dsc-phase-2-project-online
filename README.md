@@ -584,4 +584,6 @@ square footage of the basement: 1.424
 These VIFs show a good amount of correlation between the variables and price, but do not exceed the threshold for multicollinearity.
 
 Removing houses above $1MM makes the distribution of residuals much more normally distributed.
-It brings skew down from 3.02 to 0.53 and kurtosis down from 35.77 to 3.2.
+It brings skew down from 3.02 to 0.53 and kurtosis down from 35.77 to 3.2. <br />
+
+Houses priced under the regression plane could potentially be undervalued. Modernizing these homes with renovations could marginally increase the sale price at a greater rate than the cost of materials & labor.
