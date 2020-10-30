@@ -2,7 +2,7 @@
 
 ![png](https://github.com/Nick-Kolowich/dsc-phase-2-project-online/blob/master/images/3.png)
 
-Housing prices in Seattle by price quantile. Red areas indicate more affluent homes, clusters are see in town, most notably Bellevue, and around water. 
+Housing prices in Seattle by price quantile. Red points indicate more affluent homes, clusters of which are seen in town, most notably near Bellevue.
 
 ### Which features correlate most highly with price? 
 <details>
@@ -457,6 +457,8 @@ two_var_model.summary()
 
 ###  Scatter Plots of Price vs. Grade & Square Footage
 
+![png](https://github.com/Nick-Kolowich/dsc-phase-2-project-online/blob/master/images/7.png)
+
 <details>
     <summary> Original Data </summary>
 
@@ -491,6 +493,8 @@ plt.show()
 
 </details>
 
+![png](https://github.com/Nick-Kolowich/dsc-phase-2-project-online/blob/master/images/8.png)
+
 <details>
     <summary> z-score Data </summary>
 
@@ -524,6 +528,8 @@ plt.show()
 ![png](https://github.com/Nick-Kolowich/dsc-phase-2-project-online/blob/master/images/fig5.png)
 
 </details>
+
+![png](https://github.com/Nick-Kolowich/dsc-phase-2-project-online/blob/master/images/9.png)
 
 <details>
     <summary> Log Transformed Data </summary>
