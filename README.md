@@ -553,7 +553,7 @@ model_under_1m.summary()
 ### Effect on Residuals
 
 <details>
-    <summary> how does removing outliers affect the distribution of residuals? </summary>  
+    <summary> how does removing outliers affect the distribution of residuals? </summary>  <br />
 
 
 Before
