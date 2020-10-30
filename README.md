@@ -365,6 +365,10 @@ two_var_model.summary()
 
 ![png](https://github.com/Nick-Kolowich/dsc-phase-2-project-online/blob/master/images/7.png)
 
+![png](https://github.com/Nick-Kolowich/dsc-phase-2-project-online/blob/master/images/8.png)
+
+![png](https://github.com/Nick-Kolowich/dsc-phase-2-project-online/blob/master/images/9.png)
+
 <details>
     <summary> Original Data </summary>
 
@@ -399,8 +403,6 @@ plt.show()
 
 </details>
 
-![png](https://github.com/Nick-Kolowich/dsc-phase-2-project-online/blob/master/images/8.png)
-
 <details>
     <summary> z-score Data </summary>
 
@@ -434,8 +436,6 @@ plt.show()
 ![png](https://github.com/Nick-Kolowich/dsc-phase-2-project-online/blob/master/images/fig5.png)
 
 </details>
-
-![png](https://github.com/Nick-Kolowich/dsc-phase-2-project-online/blob/master/images/9.png)
 
 <details>
     <summary> Log Transformed Data </summary>
