@@ -572,12 +572,12 @@ The final linear model has an r-squared of 0.535, which means it can only explai
 
 <details>
     <summary> Their corresponding VIFs were: </summary>
+  <br />
+square footage of the house: 5.787
 
-sqft_House: 5.787
+grade: 3.074
 
-Grade: 3.074
-
-sqft_Basement: 1.424
+square footage of the basement: 1.424
 
 </details>
 
