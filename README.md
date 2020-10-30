@@ -1,6 +1,6 @@
 # King County Housing Analysis
 
-![png](https://github.com/Nick-Kolowich/dsc-phase-2-project-online/blob/master/images/2.png)
+![png](https://github.com/Nick-Kolowich/dsc-phase-2-project-online/blob/master/images/3.png)
 
 Housing prices in Seattle by price quantile. Red areas indicate more affluent homes, clusters are see in town, most notably Bellevue, and around water. 
 
