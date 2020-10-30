@@ -27,63 +27,6 @@ corr_matrix_90['Price']
 
 </details>
 
-
-###  Create Training & Testing Sets
-
-<details>
-    <summary> The linear model created for the training set should apply fairly well to the test data set.    </summary>
-    
-```python
-# create target and features
-target = data_z['Price']
-features = data_z.drop(columns=['Price'], axis=1)
-
-```python
-# instantiate a linear regression model
-linear_reg_model = LinearRegression()
-linear_reg_model.fit(X_train, y_train)
-
-# predict a linear model for both target and test sets
-target_train = linear_reg_model.predict(X_train)
-target_test = linear_reg_model.predict(X_test)
-
-```python
-# Compute and print r^2 and RMSE
-print("r-squared: {}".format(round(linear_reg_model.score(X_train, y_train), 4)))
-rmse = np.sqrt(mean_squared_error(y_train, target_train))
-print("RMSE: {}".format(round(rmse, 4)))
-```
-
-    r-squared: 0.564
-    RMSE: 0.6432
-    
-
-```python
-# Perform 3-fold cross validation
-cvscores_3 = cross_val_score(linear_reg_model, features, target, cv=3)
-print("3-fold cross validation: {}".format(round(np.mean(cvscores_3),4)))
-
-# perform 5-fold cross validation
-cvscores_5 = cross_val_score(linear_reg_model, features, target, cv=5)
-print("5-fold cross validation: {}".format(round(np.mean(cvscores_5), 4)))
-
-# perform 10-fold cross validation
-cvscores_10 = cross_val_score(linear_reg_model, features, target, cv=10)
-print("10-fold cross validation: {}".format(round(np.mean(cvscores_10), 4)))
-```
-
-    3-fold cross validation: 0.5621
-    5-fold cross validation: 0.5611
-    10-fold cross validation: 0.5595
-    
-computed r-squared = 0.564
-mean r-squared for 3,5, and 10 fold CVs = 0.5609
-
-The linear model created for the training set should apply fairly well to the test data set.    
-
-</details>
-
-
 ### Initial OLS Regression Model
 
 <details>
@@ -316,43 +259,6 @@ list(zip(significant_features, vif))
 
 </details>
 
-### Correlation Matrix of Significant Features 
-
-<details>
-    <summary> recreating the correlation matrix, keeping only selected features </summary>
-
-```python
-correlation_significant_features_df = data_z[significant_features]
-correlation_significant_features_df.insert(loc=0, column='Price', value=data_z['Price'])
-correlation_significant_features = correlation_significant_features_df.corr()
-
-# creates the figure and axis for the subplots
-
-fig1, ax1 = plt.subplots(figsize=(13, 8))
-
-# creates a mask to remove the mirrored half of heatmap
-
-mask = np.triu(np.ones_like(correlation_significant_features, dtype=np.bool))
-
-# adjusts mask and dataframe
-
-mask_sig_adj = mask[1:, :-1]
-correlation_sig_adj = correlation_significant_features.iloc[1:,:-1].copy()
-
-# plots heatmap
-
-sns.heatmap(correlation_sig_adj, mask=mask_sig_adj, annot=True, fmt='.2f', cmap='Blues', linewidths=3, vmin=-0.5, vmax=0.9, cbar_kws={"shrink": .8})
-
-# ytick adjustment
-
-plt.xticks(rotation=60)
-plt.show()
-```
-
-![png](https://github.com/Nick-Kolowich/dsc-phase-2-project-online/blob/master/images/fig3.png)
-
-</details>
-
 ### Lasso Regression
 
 <details>
@@ -371,7 +277,7 @@ plt.show()
 ```
 
 
-![png](https://github.com/Nick-Kolowich/dsc-phase-2-project-online/blob/master/images/fig12.png)
+![png](https://github.com/Nick-Kolowich/dsc-phase-2-project-online/blob/master/images/download%20(9).png)
 
 </details>
 
